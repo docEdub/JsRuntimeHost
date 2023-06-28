@@ -1,5 +1,7 @@
 if(NAPI_JAVASCRIPT_ENGINE STREQUAL "JSI")
     add_subdirectory(Node-API-JSI)
+elseif(NAPI_JAVASCRIPT_ENGINE STREQUAL "Napi-c-external")
+    add_subdirectory(Node-API-C-External)
 else()
     add_subdirectory(Node-API)
 endif()
