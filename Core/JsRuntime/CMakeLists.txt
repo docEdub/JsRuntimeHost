@@ -4,7 +4,8 @@ set(SOURCES
     "Source/JsRuntime.cpp")
 
 add_library(JsRuntime ${SOURCES})
-warnings_as_errors(JsRuntime)
+# TODO: Fix asio dependency build errors re: deprecated std::allocator<void> usage and re-enabled warnings as errors.
+#warnings_as_errors(JsRuntime)
 
 target_include_directories(JsRuntime PRIVATE "Include/Babylon")
 target_include_directories(JsRuntime PUBLIC "Include")
