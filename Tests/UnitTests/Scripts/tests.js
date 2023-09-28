@@ -169,32 +169,31 @@ describe("XMLHTTPRequest", function () {
        expect(xhr).to.have.property('status', 200);
     });
 
+    it("should load URL using app:/// scheme", async function () {
+        this.timeout(1000);
+        const xhr = await createRequest("GET", "app:///Scripts/test.txt");
+        expect(xhr).to.have.property('response', 'some text');
+    });
+
+    it("should load URL using app:/// scheme as array buffer", async function () {
+        this.timeout(1000);
+        const xhr = await createRequest("GET", "app:///Scripts/test.txt", undefined, "arraybuffer");
+        var expected = Uint8Array.from("some text".split(""), x => x.charCodeAt(0));
+        var response = new Uint8Array(xhr.response);
+        expect(response).to.eql(expected);
+    });
+
     if (hostPlatform === "macOS" || hostPlatform === "Unix" || hostPlatform === "Win32") {
         it("should load URL pointing to symlink", async function () {
             this.timeout(1000);
-            const xhr = await createRequest("GET", "app:///Scripts/symlink_1.js");
-            expect(xhr).to.have.property('response', 'var symlink_target_js = true;');
+            const xhr = await createRequest("GET", "app:///Scripts/test_symlink_1.txt");
+            expect(xhr).to.have.property('response', 'some text');
         });
 
         it("should load URL pointing to symlink that points to a symlink", async function () {
             this.timeout(1000);
-            const xhr = await createRequest("GET", "app:///Scripts/symlink_2.js");
-            expect(xhr).to.have.property('response', 'var symlink_target_js = true;');
-        });
-        it("should load URL pointing to symlink as array buffer", async function () {
-            this.timeout(1000);
-            const xhr = await createRequest("GET", "app:///Scripts/symlink_1.js", undefined, "arraybuffer");
-            var expected = Uint8Array.from("var symlink_target_js = true;".split(""), x => x.charCodeAt(0));
-            var response = new Uint8Array(xhr.response);
-            expect(response).to.eql(expected);
-        });
-
-        it("should load URL pointing to symlink that points to a symlink as array buffer", async function () {
-            this.timeout(1000);
-            const xhr = await createRequest("GET", "app:///Scripts/symlink_2.js", undefined, "arraybuffer");
-            var expected = Uint8Array.from("var symlink_target_js = true;".split(""), x => x.charCodeAt(0));
-            var response = new Uint8Array(xhr.response);
-            expect(response).to.eql(expected);
+            const xhr = await createRequest("GET", "app:///Scripts/test_symlink_2.txt");
+            expect(xhr).to.have.property('response', 'some text');
         });
     }
 });

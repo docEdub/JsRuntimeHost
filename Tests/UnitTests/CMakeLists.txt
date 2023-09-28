@@ -3,12 +3,8 @@ if(WINDOWS_STORE)
 endif()
 
 set(SCRIPTS
+    "Scripts/test.txt"
     "Scripts/tests.js")
-
-if(APPLE OR UNIX OR WIN32)
-    set(SCRIPTS ${SCRIPTS}
-        "Scripts/symlink_target.js")
-endif()
 
 set(EXTERNAL_SCRIPTS
     "../node_modules/chai/chai.js"
@@ -86,9 +82,9 @@ else()
 
     if(APPLE OR UNIX OR WIN32)
         add_custom_command(TARGET UnitTests POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/Scripts/symlink_target.js" "${CMAKE_CFG_INTDIR}/Scripts/symlink_1.js")
+            COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/Scripts/test.txt" "${CMAKE_CFG_INTDIR}/Scripts/test_symlink_1.txt")
         add_custom_command(TARGET UnitTests POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/Scripts/symlink_1.js" "${CMAKE_CFG_INTDIR}/Scripts/symlink_2.js")
+            COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/Scripts/test_symlink_1.txt" "${CMAKE_CFG_INTDIR}/Scripts/test_symlink_2.txt")
     endif()
 endif()
 

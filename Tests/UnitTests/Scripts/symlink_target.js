@@ -1,1 +1,0 @@
-var symlink_target_js = true;
