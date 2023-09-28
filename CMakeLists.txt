@@ -19,7 +19,7 @@ FetchContent_Declare(arcana
     GIT_TAG 10d167ffe0f86b2ddaccd93fd78ff2240cbb0c49)
 FetchContent_Declare(UrlLib
     GIT_REPOSITORY https://github.com/docEdub/UrlLib.git
-    GIT_TAG 2c2dcdb6fd61b9c52fc70de1f2b04d4de06ef278)
+    GIT_TAG e90badad6d1e4a787f8f825642c356f97249c2a4)
 FetchContent_Declare(asio
     GIT_REPOSITORY https://github.com/chriskohlhoff/asio.git
     GIT_TAG f693a3eb7fe72a5f19b975289afc4f437d373d9c)
